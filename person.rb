@@ -20,5 +20,5 @@ class Person
   public :can_use_services?
 end
 
-person = Person.new(17, 'Anja')
-puts person.can_use_services?
+# person = Person.new(17, 'Anja')
+# p person.can_use_services?
