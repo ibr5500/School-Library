@@ -1,4 +1,7 @@
-class Person
+require './nameable'
+
+class Person < Nameable
+
   attr_reader :id # we need only getter
   attr_accessor :name, :age # we need to get and set
 
@@ -14,10 +17,14 @@ class Person
   end
   private :of_age?
 
+  public
   def can_use_services?
     of_age? || @parent_permission
   end
-  public :can_use_services?
+
+  def correct_name
+    @name
+  end
 end
 
 # person = Person.new(57, 'Anja')
