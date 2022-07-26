@@ -25,6 +25,3 @@ class Person < Nameable
     @name
   end
 end
-
-# person = Person.new(57, 'Anja')
-# p person.can_use_services?
