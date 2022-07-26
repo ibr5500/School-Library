@@ -5,7 +5,7 @@ class Decorator < Nameable
 
   def initialize(name)
     @nameable = name
-    super
+    super()
   end
 
   def correct_name
