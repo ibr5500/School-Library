@@ -1,6 +1,4 @@
 require './person'
-#require './capitalize_decorator'
-#require './trimmer_decorator'
 require './rental'
 require './book'
 require './app'

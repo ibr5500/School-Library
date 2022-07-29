@@ -4,6 +4,7 @@ require './rental'
 require './teacher'
 require './student'
 
+# rubocop:disable  Metrics/ClassLength
 class App
   def initialize
     @rentals = []
@@ -20,9 +21,10 @@ class App
                '6 - List all rentals for a given person id',
                '7 - Exit']
 
-    choices.each { |c| puts c.to_s }
+    choices.each { |choice| puts choice.to_s }
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
   def choose(choice)
     case choice
     when 1
@@ -45,6 +47,7 @@ class App
       choices_list
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   def run
     puts 'Welcome to the School Library App!'
@@ -95,6 +98,7 @@ class App
     end
   end
 
+  # rubocop:disable  Metrics/MethodLength
   def create_student
     print 'Age: '
     age = gets.chomp.to_i
@@ -124,6 +128,7 @@ class App
     @people.push(student)
     puts 'Person created successfully'
   end
+  # rubocop:enable  Metrics/MethodLength
 
   def create_teacher
     print 'Age: '
@@ -168,6 +173,7 @@ class App
     puts 'Book Created successfully'
   end
 
+  # rubocop:disable  Metrics/MethodLength
   def create_rental
     if @books.empty?
       puts 'Sorry there are no books avalibales'
@@ -194,6 +200,7 @@ class App
     @rentals.push(rent_info)
     puts 'Rental created successfully'
   end
+  # rubocop:enable  Metrics/MethodLength
 
   def list_rentals
     if @rentals.empty?
@@ -209,3 +216,5 @@ class App
     end
   end
 end
+
+# rubocop:enable  Metrics/ClassLength
