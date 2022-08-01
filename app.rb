@@ -59,13 +59,14 @@ class Library
     end
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create_student
     print 'Age: '
     age = gets.chomp.to_i
     while age < 1
       print 'Please enter a valid age: '
       age = gets.chomp.to_i
-    end    
+    end
 
     print 'Name: '
     name = gets.chomp.capitalize
@@ -90,6 +91,7 @@ class Library
     puts 'Person created successfully'
     puts
   end
+  # rubocop:enable Metrics/MethodLength
 
   def create_teacher
     print 'Age: '
