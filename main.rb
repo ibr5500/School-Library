@@ -4,11 +4,11 @@ require './book'
 require './app'
 
 class App
-  def self.menu
-    puts 'Welcome to the School Library App!'
-    puts "\n"
-    puts 'Please choose an option by entering a number: '
+  def initialize
+    @run = Library.new
+  end
 
+  def menu
     choices = ['1 - List all book',
                '2 - List all People',
                '3 - Create a person',
@@ -18,37 +18,26 @@ class App
                '7 - Exit']
 
     choices.each { |choice| puts choice.to_s }
-
-    Integer(gets.chomp)
   end
 
-  run = Library.new
+  def start
+    puts 'Welcome to the School Library App!'
+    puts "\n"
+    puts 'Please choose an option by entering a number: '
 
-  loop do
-    case menu
-    when 1
-      run.list_books
-    when 2
-      run.list_people
-    when 3
-      run.create_person
-    when 4
-      run.create_book
-    when 5
-      run.create_rental
-    when 6
-      run.list_rentals
-    when 7
-      puts 'Thank you for using the app!'
-      exit
-    else
-      puts 'Choose a number between 1 to 7'
+    loop do
+      menu
+      user_choose = gets.chomp.to_i
+      break if user_choose == 7
+
+      @run.choose(user_choose)
     end
+    puts 'Thank you for using the app!'
   end
 end
 
 def main
-  App.new
+  App.new.start
 end
 
 main
