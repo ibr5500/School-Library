@@ -20,7 +20,7 @@
 
 - linters for Ruby
 
-## Authors
+## Author
 
 👤 **Ibrahim Ahmat**
 
