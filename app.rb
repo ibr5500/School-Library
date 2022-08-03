@@ -12,8 +12,10 @@ class Library
     @books = []
     @people = []
     load_data
+    load_reantals
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
   def choose(input)
     case input
     when 1
@@ -35,9 +37,11 @@ class Library
       puts 'Choose a number between 1 to 7'
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def load_data
-    if File.empty?('books.json') || !File.exists?('books.json')
+    if File.empty?('books.json')
       puts 'List is empty'
     else
       books = JSON.parse(File.read('books.json'))
@@ -46,7 +50,7 @@ class Library
       end
     end
 
-    if File.empty?('people.json') || !File.exists?('people.json')
+    if File.empty?('people.json')
       puts 'List is empty'
     else
       people = JSON.parse(File.read('people.json'))
@@ -58,13 +62,18 @@ class Library
         end
       end
     end
+  end
+  # rubocop:enable Metrics/PerceivedComplexity
 
-    if File.empty?('rentals.json') || !File.exists?('rentals.json')
+  def load_reantals
+    if File.empty?('rentals.json') || !File.exist?('rentals.json')
       puts 'List is empty'
     else
       rentals = JSON.parse(File.read('rentals.json'))
       rentals.each do |rent|
-        @rentals.push(Rental.new(rent['date'], @books.select { |book| book.title == rent['Book'] }[0], @people.select { |person| person.name == rent['Name'] }[0]))
+        @rentals.push(Rental.new(rent['date'],
+                                 @books.select { |book| book.title == rent['Book'] }[0],
+                                 @people.select { |person| person.name == rent['Name'] }[0]))
       end
     end
   end
@@ -115,9 +124,6 @@ class Library
       print 'Please enter a name: '
       name = gets.chomp.capitalize
     end
-
-    print 'Classroom: '
-    classroom = gets.chomp.upcase
 
     print 'Has parent permission? (Y/N) '
     permission = gets.chomp.upcase
@@ -252,8 +258,8 @@ class Library
     end
 
     @people.each do |person|
-      if person.class == 'Student'
-        people.push({ class: person.class, classroom: person.classroom, Name: person.name, Age: person.age })
+      if person.is_a? Student
+        people.push({ Class: person.class, classroom: person.classroom, Name: person.name, Age: person.age })
       else
         people.push({ Class: person.class, Name: person.name, Age: person.age })
       end
@@ -265,7 +271,7 @@ class Library
 
     File.write('books.json', JSON.generate(books))
     File.write('people.json', JSON.generate(people))
-    File.write("rentals.json", JSON.generate(rents))
+    File.write('rentals.json', JSON.generate(rents))
   end
 end
 # rubocop:enable Metrics/ClassLength
